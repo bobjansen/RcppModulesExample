@@ -23,8 +23,8 @@ library(RcppModulesExample)
 
 The aim of this vignette is to describe all the aspects of Rcpp Modules, from
 the very basic to the more advanced. If your not familiar with Rcpp please refer
-to Allaire, Eddelbuettel and Francois (2017). Some `C++` knowledge is assumed
-but only at a basic level. I'm not a `C++` expert either (I did get advice
+to Allaire, Eddelbuettel and Francois (2017). Some C++ knowledge is assumed
+but only at a basic level. I'm not a C++ expert either (I did get advice
 though). Stubbornness might help. The code does not include any functionality
 except for printing and multiplying strings by design. The only goal of the
 package is to give minimal examples of all Rcpp Modules features. This vignette
@@ -40,7 +40,7 @@ git checkout Step1
 ```
 and so on. _Branches have not been created yet._
 
-# Step 1: Creating an Rcpp package
+# Step 0: Creating an Rcpp package
 
 If Rcpp is not yet installed, install it. Now you can create a package skeleton
 that is ready to use Rcpp with the following command:
@@ -49,10 +49,26 @@ that is ready to use Rcpp with the following command:
 #install.packages('Rcpp')
 Rcpp::Rcpp.package.skeleton(
   name = 'RcppModulesExample',
-  module = FALSE, # Rcpp comes with some examples as well.
+  module = FALSE, # Note that Rcpp itself comes with examples as well.
   example_code = FALSE,
   author = "Bob Jansen",
   email = "bobjansen@hey.com"
 )
 ```
 
+# Step 1: Creating a function
+
+The simplest way to run C++ code from R is by using functions. Suppose we want
+to expose the following function (this can be found in `src/step1.cpp`):
+
+```{cpp, eval = FALSE}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+void echo(StringVector message) {
+  Rcpp::Rcout << message << std::endl;
+}
+```
+
+Note that if your goal is to just expose a number of C++-functions to R, it
+will probably be easier to use Rcpp attributes.

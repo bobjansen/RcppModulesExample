@@ -3,8 +3,8 @@ Introduction
 
 The aim of this vignette is to describe all the aspects of Rcpp Modules,
 from the very basic to the more advanced. If your not familiar with Rcpp
-please refer to Allaire, Eddelbuettel and Francois (2017). Some `C++`
-knowledge is assumed but only at a basic level. I’m not a `C++` expert
+please refer to Allaire, Eddelbuettel and Francois (2017). Some C++
+knowledge is assumed but only at a basic level. I’m not a C++ expert
 either (I did get advice though). Stubbornness might help. The code does
 not include any functionality except for printing and multiplying
 strings by design. The only goal of the package is to give minimal
@@ -30,7 +30,7 @@ skeleton that is ready to use Rcpp with the following command:
     #install.packages('Rcpp')
     Rcpp::Rcpp.package.skeleton(
       name = 'RcppModulesExample',
-      module = FALSE, # Rcpp comes with some examples as well.
+      module = FALSE, # Note that Rcpp itself comes with examples as well.
       example_code = FALSE,
       author = "Bob Jansen",
       email = "bobjansen@hey.com"
