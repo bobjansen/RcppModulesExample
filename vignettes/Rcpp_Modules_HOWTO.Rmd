@@ -49,7 +49,8 @@ that is ready to use Rcpp with the following command:
 #install.packages('Rcpp')
 Rcpp::Rcpp.package.skeleton(
   name = 'RcppModulesExample',
-  module = FALSE, # Note that Rcpp itself comes with examples as well.
+  # Note that Rcpp itself comes with examples as well which we don't use.
+  module = FALSE,
   example_code = FALSE,
   author = "Bob Jansen",
   email = "bobjansen@hey.com"
@@ -59,7 +60,7 @@ Rcpp::Rcpp.package.skeleton(
 # Step 1: Creating a function
 
 The simplest way to run C++ code from R is by using functions. Suppose we want
-to expose the following function (this can be found in `src/step1.cpp`):
+to expose the following function (the source can be found in `src/step1.cpp`):
 
 ```{cpp, eval = FALSE}
 #include <Rcpp.h>
@@ -67,6 +68,13 @@ using namespace Rcpp;
 
 void echo(StringVector message) {
   Rcpp::Rcout << message << std::endl;
+}
+```
+We need to define a module in C++ and then load the module into R. To create
+the module use the aptly named `RCPP_MODULE` macro
+```{cpp, eval = FALSE}
+RCPP_MODULE(step1_module) {
+  function("echo", &echo)
 }
 ```
 
