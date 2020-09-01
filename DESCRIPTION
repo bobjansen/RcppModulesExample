@@ -7,6 +7,7 @@ Author: Bob Jansen
 Maintainer: Bob Jansen <bobjansen@gmail.com>
 Description: One paragraph description of what the package does as one
         or more full sentences.
+Encoding: UTF-8
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
@@ -14,3 +15,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+RoxygenNote: 7.1.1
