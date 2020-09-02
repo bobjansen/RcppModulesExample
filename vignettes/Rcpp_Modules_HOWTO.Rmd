@@ -57,26 +57,42 @@ Rcpp::Rcpp.package.skeleton(
 )
 ```
 
-# Step 1: Creating a function
+# Step 1: Exposing a function
 
 The simplest way to run C++ code from R is by using functions. Suppose we want
 to expose the following function (the source can be found in `src/step1.cpp`):
 
-```{cpp, eval = FALSE}
+```{Rcpp, eval = FALSE}
 #include <Rcpp.h>
 using namespace Rcpp;
 
-void echo(StringVector message) {
-  Rcpp::Rcout << message << std::endl;
+void echo(std::string message) {
+  Rcpp::Rcout << message << " from C++" << std::endl;
 }
 ```
 We need to define a module in C++ and then load the module into R. To create
 the module use the aptly named `RCPP_MODULE` macro
-```{cpp, eval = FALSE}
+```{Rcpp, eval = FALSE}
+// An RCPP_MODULE name step1_module
 RCPP_MODULE(step1_module) {
+  // This module has a function called function which is the echo function
+  // defined above.
   function("echo", &echo)
 }
 ```
 
 Note that if your goal is to just expose a number of C++-functions to R, it
 will probably be easier to use Rcpp attributes.
+
+This code can now be loaded using `Rcpp::loadModule('step1', TRUE)`.
+```{r eval = FALSE}
+.onLoad <- function(pkgname, libname) {
+    Rcpp::loadModule('step1_module', TRUE)
+}
+```
+If you load this pacakge (using installation and `library()` or through
+`devtools::load_all()`) you can use the Echo function:
+```{r}
+echo("Hello World")
+```
+

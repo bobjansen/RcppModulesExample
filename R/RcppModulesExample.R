@@ -1,3 +1,3 @@
 .onLoad <- function(pkgname, libname) {
-  Rcpp::loadModule('step1', TRUE)
+  Rcpp::loadModule('step1_module', TRUE)
 }

@@ -2,5 +2,5 @@
 using namespace Rcpp;
 
 void echo(std::string message) {
-  Rcpp::Rcout << message << std::endl;
+  Rcpp::Rcout << message << " from C++" << std::endl;
 }
