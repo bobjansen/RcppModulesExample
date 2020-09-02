@@ -24,14 +24,15 @@ library(RcppModulesExample)
 The aim of this vignette is to describe all the aspects of Rcpp Modules, from
 the very basic to the more advanced. If your not familiar with Rcpp please refer
 to Allaire, Eddelbuettel and Francois (2017). Some C++ knowledge is assumed
-but only at a basic level. I'm not a C++ expert either (I did get advice
+but only at a basic level. I'm not a C++ expert either (I did get expert advice
 though). Stubbornness might help. The code does not include any functionality
-except for printing and multiplying strings by design. The only goal of the
-package is to give minimal examples of all Rcpp Modules features. This vignette
-is contained in a fully functional Rcpp package.
+except for concatenating, printing and multiplying strings by design. The only
+goal of the package is to give minimal examples of all Rcpp Modules features.
+The package around this vignette is fully functional and should be loadable
+using the normal tools.
 
 The following sections contain a step by step guide of creating the package,
-starting with the most basic features.
+starting with the most basic features and building up from there.
 
 All steps can be referred to by their own branch, to get to the first step
 check out branch `Step1`
@@ -43,7 +44,7 @@ and so on. _Branches have not been created yet._
 # Step 0: Creating an Rcpp package
 
 If Rcpp is not yet installed, install it. Now you can create a package skeleton
-that is ready to use Rcpp with the following command:
+that is ready to go with Rcpp using the following command:
 
 ```{r, eval = FALSE}
 #install.packages('Rcpp')
