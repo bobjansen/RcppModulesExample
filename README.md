@@ -80,3 +80,47 @@ If you load this pacakge (using installation and `library()` or through
     echo("Hello World")
     #> Hello World from C++
 
+Step 2: Exposing a class
+========================
+
+Alternatively, we can create an `Echo` class that does the echo’ing in a
+more stateful manner:
+
+    #include <string>
+    #include <Rcpp.h>
+    using namespace Rcpp;
+
+    class Echo {
+    public:
+      Echo(std::string message) : message_(message) {}
+      std::string get() { return message_; };
+
+    private:
+      std::string message_;
+    };
+
+This class can be constructed with a message and this message can be
+retrieved with the `get()` method.
+
+It can be exposed to R with another module (or the same module if you’re
+so inclined):
+
+    RCPP_MODULE(step2_module) {
+      // Instead of a function we expose class.
+      class_<Echo>("Echo")
+      // The class has a constructor which takes a string argument. The arguments
+      // to the constructor are put in the brackets. The .constructor method
+      // doesn't take any arguments.
+      .constructor<std::string>()
+      // .method works the same as function but don't forget to specify the class
+      // in the second argument.
+      .method("get", &Echo::get)
+      ;
+    };
+
+Now make sure to load the new module using `loadModule()`:
+
+    .onLoad <- function(pkgname, libname) {
+      Rcpp::loadModule('step1_module', TRUE)
+      Rcpp::loadModule('step2_module', TRUE)
+    }
