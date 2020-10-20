@@ -23,7 +23,9 @@ step check out branch `Step1`
 
     git checkout Step1
 
-and so on.
+and so on. If you want to start a project but don’t need all the
+functionality, you can just copy the source code contained in that
+branch and get started.
 
 Step 0: Creating an Rcpp package
 ================================
@@ -79,4 +81,3 @@ If you load this pacakge (using installation and `library()` or through
 
     echo("Hello World")
     #> Hello World from C++
-
