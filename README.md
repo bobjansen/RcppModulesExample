@@ -23,7 +23,7 @@ step check out branch `Step1`
 
     git checkout Step1
 
-and so on. *Branches have not been created yet.*
+and so on.
 
 Step 0: Creating an Rcpp package
 ================================

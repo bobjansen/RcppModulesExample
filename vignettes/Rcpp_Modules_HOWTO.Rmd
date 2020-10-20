@@ -42,7 +42,7 @@ check out branch `Step1`
 ```{bash, eval = FALSE}
 git checkout Step1
 ```
-and so on. _Branches have not been created yet._
+and so on.
 
 # Step 0: Creating an Rcpp package
 
