@@ -25,12 +25,13 @@ The aim of this vignette is to describe all the aspects of Rcpp Modules, from
 the very basic to the more advanced. If you're not familiar with Rcpp please
 refer to Allaire, Eddelbuettel and Francois (2017). Some C++ knowledge is
 assumed but only at a basic level. I'm not a C++ expert either (I did get
-expert advice though). Stubbornness helps. The code does not include any
-functionality except for concatenating, printing and multiplying of strings by
-design. The only goal of the package is to give minimal examples of all Rcpp
-Modules features. The package around this vignette is fully functional and
-should be loadable using the tooling you're used to such as building and
-installing the package or using
+expert advice though). Stubbornness helps.
+[StackOverFlow](https://stackoverflow.com/questions/tagged/rcpp) too. The code
+does not include any functionality except for concatenating, printing and
+multiplying of strings by design. The only goal of the package is to give
+minimal examples of all Rcpp Modules features. The package around this vignette
+is fully functional and should be loadable using the tooling you're used to
+such as building and installing the package or using
 [`devtools`](https://cran.r-project.org/web/packages/devtools/) or
 [`pkgload`](https://cran.r-project.org/web/packages/pkgload/).
 
