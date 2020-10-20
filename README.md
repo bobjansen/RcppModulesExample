@@ -77,7 +77,7 @@ This code can now be loaded using `Rcpp::loadModule('step1', TRUE)`.
     }
 
 If you load this pacakge (using installation and `library()` or through
-`devtools::load_all()`) you can use the Echo function:
+`devtools::load_all()`) you can use the `echo` function:
 
     echo("Hello World")
     #> Hello World from C++
