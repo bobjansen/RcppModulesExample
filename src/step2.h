@@ -4,9 +4,10 @@ using namespace Rcpp;
 
 class Echo {
 public:
-  Echo(std::string message) : message_(message) {}
-  std::string get() { return message_; };
+  Echo(std::string message) : message(message) {}
+  std::string get() { return message; }
+  void print() { Rcout << message << " from C++" << std::endl; };
 
 private:
-  std::string message_;
+  std::string message;
 };
