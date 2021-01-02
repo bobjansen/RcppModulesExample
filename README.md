@@ -92,15 +92,16 @@ more stateful manner:
 
     class Echo {
     public:
-      Echo(std::string message) : message_(message) {}
-      std::string get() { return message_; };
+      Echo(std::string message) : message(message) {}
+      std::string get() { return message; };
+      void print() { Rcout << message << " from C++" << std::endl; };
 
     private:
-      std::string message_;
+      std::string message;
     };
 
 This class can be constructed with a message and this message can be
-retrieved with the `get()` method.
+retrieved with the `get()` method or printed using the `print()` method.
 
 It can be exposed to R with another module (or the same module if you’re
 so inclined):
@@ -115,6 +116,7 @@ so inclined):
       // .method works the same as function but don't forget to specify the class
       // in the second argument.
       .method("get", &Echo::get)
+      .method("print", &Echo::print)
       ;
     };
 
@@ -124,3 +126,13 @@ Now make sure to load the new module using `loadModule()`:
       Rcpp::loadModule('step1_module', TRUE)
       Rcpp::loadModule('step2_module', TRUE)
     }
+
+and use the Echo object:
+
+    echoObject <- new(Echo, 'Hello World')
+    echoObject$print()
+    #> Hello World from C++
+    echoObject$get()
+    #> [1] "Hello World"
+
+It’s that simple.
