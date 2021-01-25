@@ -9,10 +9,12 @@ using namespace Rcpp;
 
 RcppExport SEXP _rcpp_module_boot_step1_module();
 RcppExport SEXP _rcpp_module_boot_step2_module();
+RcppExport SEXP _rcpp_module_boot_step3_module();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rcpp_module_boot_step1_module", (DL_FUNC) &_rcpp_module_boot_step1_module, 0},
     {"_rcpp_module_boot_step2_module", (DL_FUNC) &_rcpp_module_boot_step2_module, 0},
+    {"_rcpp_module_boot_step3_module", (DL_FUNC) &_rcpp_module_boot_step3_module, 0},
     {NULL, NULL, 0}
 };
 
