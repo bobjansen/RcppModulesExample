@@ -140,3 +140,89 @@ and use the Echo object:
     #> [1] "Hello World"
 
 It’s that simple.
+
+Step 3: Modules with multiple parts
+-----------------------------------
+
+Combining multiple functions and classes into one module is as easy as
+you might hope. For example, take these new C++ functions and classes
+which can be found in `src/step3.cpp` as well. This code defines to add
+or multiple ints or strings.
+
+    #include "step3.h"
+
+    int addNumbers(int number1, int number2) {
+      return number1 + number2;
+    }
+
+    std::string combineStrings(std::string string1, std::string string2) {
+      return string1 + string2;
+    }
+
+    std::string StringMultiplier::add(std::string str2) {
+      return combineStrings(str, str2);
+    }
+
+    std::string StringMultiplier::multiply(int count) {
+      std::string output = "";
+      for (int i = 0; i < count; i++) {
+        output = combineStrings(output, str);
+      }
+      return output;
+    }
+
+    int NumberMultiplier::add(int number2) {
+      return number + number2;
+    }
+
+    int NumberMultiplier::multiply(int count) {
+      return number * count;
+    }
+
+The `RCPP_MODULE` to use these is defined below. It has entries for the
+functions that combine to ints or strings and the objects that use
+these:
+
+    RCPP_MODULE(step3_module) {
+      function("combineStrings", &combineStrings);
+      function("addNumbers", &addNumbers);
+
+      class_<StringMultiplier>("StringMultiplier")
+        .constructor<std::string>()
+        .method("add", &StringMultiplier::add)
+        .method("multiply", &StringMultiplier::multiply)
+      ;
+
+      class_<NumberMultiplier>("NumberMultiplier")
+        .constructor<int>()
+        .method("add", &NumberMultiplier::add)
+        .method("multiply", &NumberMultiplier::multiply)
+      ;
+    }
+
+To activate the module, update the `.onLoad()` function and reload the
+package:
+
+    .onLoad <- function(pkgname, libname) {
+      Rcpp::loadModule('step1_module', TRUE)
+      Rcpp::loadModule('step2_module', TRUE)
+      Rcpp::loadModule('step3_module', TRUE)
+    }
+
+and use it like before:
+
+    addNumbers(2L, 3)
+    #> [1] 5
+    numberMultiplier <- new(NumberMultiplier, 2L)
+    numberMultiplier$add(5)
+    #> [1] 7
+    numberMultiplier$multiply(5L)
+    #> [1] 10
+
+    combineStrings('hello world', '!')
+    #> [1] "hello world!"
+    stringMultiplier <- new(StringMultiplier, 'hello ')
+    stringMultiplier$add('world!')
+    #> [1] "hello world!"
+    combineStrings(stringMultiplier$multiply(3), 'how low')
+    #> [1] "hello hello hello how low"
