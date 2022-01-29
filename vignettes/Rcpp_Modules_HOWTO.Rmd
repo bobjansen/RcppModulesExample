@@ -96,7 +96,7 @@ This code can now be loaded using `Rcpp::loadModule('step1', TRUE)`.
     Rcpp::loadModule('step1_module', TRUE)
 }
 ```
-If you load this pacakge (using installation and `library()` or through
+If you load this package (using installation and `library()` or through
 `devtools::load_all()`) you can use the `echo` function:
 ```{r}
 echo("Hello World")
